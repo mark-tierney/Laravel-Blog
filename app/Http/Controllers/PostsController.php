@@ -45,7 +45,7 @@ class PostsController extends Controller
         // $post->save();
         $post = BlogPost::create($validated);
 
-        $request->session()->flash('status', 'Blog post created.');
+        session()->flash('status', 'Blog post created.');
 
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
@@ -86,7 +86,7 @@ class PostsController extends Controller
         $post->fill($validated);
         $post->save();
 
-        $request->session()->flash('status', 'Blog post update.');
+        session()->flash('status', 'Blog post update.');
 
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
@@ -99,6 +99,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = BlogPost::findOrFail($id);
+        $post->delete();
+
+        session()->flash('status', 'Blog post deleted.');
+
+        return redirect()->route('posts.index');
     }
 }

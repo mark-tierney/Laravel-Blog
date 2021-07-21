@@ -46,7 +46,8 @@ Route::get('/single', AboutController::class);
 
 //post routes
 
-Route::resource('posts', PostsController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update']);
+Route::resource('posts', PostsController::class);
+    //->only(['index', 'show', 'create', 'store', 'edit', 'update']);
 
 Route::get('/recent-posts/{days_ago?}', function($daysAgo = 20) {
     return 'Posts from ' . $daysAgo . ' days ago';
