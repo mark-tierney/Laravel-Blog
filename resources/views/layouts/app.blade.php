@@ -17,16 +17,19 @@
             background: linear-gradient(90deg, rgba(241,28,109,1) 0%, rgba(255,129,64,1) 100%, rgba(121,0,255,1) 100%);
         }
     </style>
+    
 </head>
 <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-dark border-bottom shadow-sm mb-3 text-white gradient-full">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Laravel CRUD</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a href="{{ route('home.index') }}" class="p-2 text-white">Home</a>
-            <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a>
-            <a href="{{ route('posts.index') }}" class="p-2 text-white">Blog Posts</a>
-            <a href="{{ route('posts.create') }}" class="p-2 text-white">Add Post</a>
-        </nav>
+    <div class="flex-column flex-md-row align-items-center p-3 px-md-4 border-bottom shadow-sm mb-3 text-white gradient-full">
+        <div class="container d-flex">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Laravel CRUD</h5>
+            <nav class="my-2 my-md-0 mr-md-3">
+                <a href="{{ route('home.index') }}" class="p-2 text-white">Home</a>
+                <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a>
+                <a href="{{ route('posts.index') }}" class="p-2 text-white">Blog Posts</a>
+                <a href="{{ route('posts.create') }}" class="p-2 text-white">Add Post</a>
+            </nav>
+        </div>
     </div>
     <div class="container">
         @if(session('status'))

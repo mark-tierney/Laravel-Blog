@@ -3,21 +3,9 @@
 @section('title', 'Home Page')
 
 @section('content')
-<h1>hello world</h1>
-
+<h1>Laravel Crud</h1>
 <div>
-    @for($i = 0; $i < 10; $i++)
-    <div>The current value is {{ $i }}</div>
-    @endfor
+    <p>This is a simple app implementing a CRUD for managing content on a MySQL database.</p>
 </div>
-
-<div>
-    @php $done = false @endphp
-    @while(!$done)
-    <div>I'm not done</div>
-    @php
-        if(random_int(0,1) === 1) $done = true;
-    @endphp
-    @endwhile
-</div>
+<a href="https://github.com/mark-tierney/Laravel-Blog" class="btn btn-success"><i class="bi bi-github" ></i> Github</a>
 @endsection
