@@ -17,7 +17,7 @@ class HomeTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertSeeText('Laravel Crud');
+        $response->assertSeeText('Laravel CRUD');
         $response->assertSeeText('This is a simple app implementing a CRUD for managing content on a MySQL database.');
     }
 
