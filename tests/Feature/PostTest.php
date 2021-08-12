@@ -61,9 +61,10 @@ class PostTest extends TestCase
             'content' => 'At least 10 chars'
         ];
 
-        $this->post('/posts', $params)
-            ->assertStatus(302)
-            ->assertSessionHas('status');
+        $this->actingAs($this->user())
+             ->post('/posts', $params)
+             ->assertStatus(302)
+             ->assertSessionHas('status');
 
         $this->assertEquals(session('status'), 'Blog post created.');
     }
@@ -75,9 +76,10 @@ class PostTest extends TestCase
             'content' => 'x'
         ];
 
-        $this->post('/posts', $params)
-            ->assertStatus(302)
-            ->assertSessionHas('errors');
+        $this->actingAs($this->user())
+             ->post('/posts', $params)
+             ->assertStatus(302)
+             ->assertSessionHas('errors');
             
         $messages = session('errors')->getMessages();
 
@@ -99,9 +101,10 @@ class PostTest extends TestCase
             'content' => 'changes content of post'
         ];
 
-        $this->put("/posts/{$post->id}", $params)
-            ->assertStatus(302)
-            ->assertSessionHas('status');
+        $this->actingAs($this->user())
+             ->put("/posts/{$post->id}", $params)
+             ->assertStatus(302)
+             ->assertSessionHas('status');
         
         $this->assertEquals(session('status'), 'Blog post updated.');
         $this->assertDatabaseMissing('blog_posts', [
@@ -119,9 +122,10 @@ class PostTest extends TestCase
             'content' => 'content of post'
         ]);
 
-        $this->delete("/posts/{$post->id}")
-            ->assertStatus(302)
-            ->assertSessionHas('status');
+        $this->actingAs($this->user())
+             ->delete("/posts/{$post->id}")
+             ->assertStatus(302)
+             ->assertSessionHas('status');
 
         $this->assertEquals(session('status'), 'Blog post deleted.');
         $this->assertDatabaseMissing('blog_posts', [
@@ -138,7 +142,7 @@ class PostTest extends TestCase
         // $post->content = 'content of post';
         // $post->save();
 
-        return  BlogPost::factory()->newTitle()->create();
+        return BlogPost::factory()->newTitle()->create();
 
         // $comment = new Comment;
         // $comment->content = 'hello!';

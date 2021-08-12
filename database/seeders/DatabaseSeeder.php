@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+//use Illuminate\Support\Str;
+//use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        if($this->command->confirm('Do you want to refresh the database?', true)) {
+            $this->command->call('migrate:refresh');
+            $this->command->info('Database refreshed');
+        }
+        
+        $this->call([
+            UsersTableSeeder::class,
+            BlogPostsTableSeeder::class,
+            CommentsTableSeeder::class
+        ]);
     }
 }

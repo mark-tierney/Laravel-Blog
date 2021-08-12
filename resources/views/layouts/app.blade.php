@@ -17,6 +17,13 @@
             background: linear-gradient(90deg, rgba(241,28,109,1) 0%, rgba(255,129,64,1) 100%, rgba(121,0,255,1) 100%);
         }
     </style>
+    <script>
+        function logout(){
+            event.preventDefault(); 
+            document.getElementById('logout-form').submit();
+        }
+    
+    </script>
     
 </head>
 <body>
@@ -28,7 +35,15 @@
                     <a href="{{ route('home.index') }}" class="p-2 text-white">Home</a>
                     {{-- <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a> --}}
                     <a href="{{ route('posts.index') }}" class="p-2 text-white">Blog Posts</a>
+                    
+                    @guest
+                    <a href="{{ route('register') }}" class="p-2 text-white">Register</a>
+                    <a href="{{ route('login') }}" class="p-2 text-white">Login</a>
+                    @else
                     <a href="{{ route('posts.create') }}" class="p-2 text-white"><i class="bi bi-plus" ></i> Add Post</a>
+                    <a href="{{ route('logout') }}" onclick="logout();" class="p-2 text-white">Logout ({{ Auth::user()->name }})</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" stlye="display:none;">@csrf</form>
+                    @endguest
                 </nav>
             </div>
         </div>
@@ -41,7 +56,10 @@
             </div>
             @endif
             @yield('content') 
+            <p class="text-muted mt-3">markltierney.com - Laravel CRUD</p>
         </div>
+        
     </div>
+    
 </body>
 </html>

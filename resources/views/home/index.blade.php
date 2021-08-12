@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <p>This is a simple app implementing a CRUD in Laravel PHP for managing content on a MySQL database, developed by Mark L Tierney for demonstration purposed.</p>
-        <a href="https://github.com/mark-tierney/Laravel-Blog" class="btn btn-success"><i class="bi bi-github" ></i> Github</a>
+        <a href="https://github.com/mark-tierney/Laravel-Blog" target="_blank" class="btn btn-success"><i class="bi bi-github" ></i> Github</a>
     </div>  
 </div>
 @endsection
