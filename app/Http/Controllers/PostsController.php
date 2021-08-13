@@ -120,8 +120,14 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = BlogPost::findOrFail($id);
-        $post->delete();
 
+        // $comments = \App\Models\Comment::where('blog_post_id', $post->id)->get();
+        // foreach($comments as $comment){
+        //     $comment->delete();
+        // }
+
+        $post->delete();
+    
         session()->flash('status', 'Blog post deleted.');
 
         return redirect()->route('posts.index');
