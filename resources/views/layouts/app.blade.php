@@ -33,7 +33,7 @@
                 <h5 class="my-0 mr-md-auto font-weight-normal">Laravel CRUD</h5>
                 <nav class="my-2 my-md-0 mr-md-3">
                     <a href="{{ route('home.index') }}" class="p-2 text-white">Home</a>
-                    {{-- <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a> --}}
+                    <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a>
                     <a href="{{ route('posts.index') }}" class="p-2 text-white">Blog Posts</a>
                     
                     @guest

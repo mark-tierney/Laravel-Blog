@@ -6,6 +6,9 @@
 <h1>Contact</h1>
 <div>
     <p>This app was created by Mark L Tierney as a demonstration of Laravel PHP full stack proficiency.</p>
-    <p>email: marktierney66@gmail.com</p>
 </div>
+
+@can('home.secret')
+    <a href="{{ route('home.secret') }}">Go to special contact details.</a>
+@endcan
 @endsection

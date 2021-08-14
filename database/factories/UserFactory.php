@@ -36,7 +36,8 @@ class UserFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Gordon Deal',
-                'email' => 'gordondeal@pseudocorp.net'
+                'email' => 'gordondeal@pseudocorp.net',
+                'is_admin' => true
             ];
         });
     }
