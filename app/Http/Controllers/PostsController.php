@@ -36,7 +36,7 @@ class PostsController extends Controller
         // dd(DB::getQueryLog());
 
         return view(
-            'posts.index', ['posts' => BlogPost::withCount('comments')->get()]
+            'posts.index', ['posts' => BlogPost::latest()->withCount('comments')->get()]
         );
     }
 
@@ -61,6 +61,7 @@ class PostsController extends Controller
     {
 
         $validated = $request->validated();
+        $validated['user_id'] = $request->user()->id;
         // $post = new BlogPost();
         // $post->title = $validated['title'];
         // $post->content = $validated['content'];
@@ -80,6 +81,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        // return view('posts.show', ['post' => BlogPost::with(['comments' => function($query){
+        //     return $query->latest();
+        // }])->findOrFail($id)]);
+
         return view('posts.show', ['post' => BlogPost::with('comments')->findOrFail($id)]);
     }
 
