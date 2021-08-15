@@ -48,7 +48,8 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row">
+        <div class="col-md-3"></div>
         <div class="col-md-6">
             @if(session('status'))
             <div class="alert alert-success">
@@ -57,6 +58,9 @@
             @endif
             @yield('content') 
             <p class="text-muted mt-3">markltierney.com - Laravel CRUD</p>
+        </div>
+        <div class="col-md-3">
+            @yield('sidebar')
         </div>
         
     </div>
