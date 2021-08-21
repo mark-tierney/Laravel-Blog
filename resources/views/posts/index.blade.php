@@ -17,14 +17,8 @@ No Posts Found
 @section('sidebar')
 <div class="container mb-3">
     <div class="row">
-        <div class="card border border-primary" style="width: 18rem;">
-            <div class="card-body pb-2">
-                <h5 class="card-title">Most Commented</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    What people are currently talking about
-                </h6>
-            </div>
-            <ul class="list-group list-group-flush">
+        <x-card title="Most Commented" subtitle="What people are currently talking about">
+            <x-slot name="items">
                 @foreach ($mostCommented as $post)
                     <li class="list-group-item">
                         <a href="{{ route('posts.show', ['post' => $post->id]) }}">
@@ -32,46 +26,32 @@ No Posts Found
                         </a>
                     </li>
                 @endforeach
-            </ul>
-        </div>
+            </x-slot>
+        </x-card>
     </div>
 </div>
 <div class="container mb-3">
     <div class="row">
-        <div class="card border border-primary" style="width: 18rem;">
-            <div class="card-body pb-2">
-                <h5 class="card-title">Most Active User</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    Users with the most posts
-            </div>
-            <ul class="list-group list-group-flush">
-                @foreach ($mostActive as $user)
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>{{ $user->name }}</span>
-                        <span>{{ $user->blog_posts_count.' posts' }}</span>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        <x-card 
+            title="Most Active User" 
+            subtitle="Users with the most posts" 
+            :items="collect($mostActive)->pluck('name')">
+        </x-card>
+            
     </div>
 </div>
 <div class="container mb-3">
     <div class="row">
-        <div class="card border border-primary" style="width: 18rem;">
-            <div class="card-body pb-2">
-                <h5 class="card-title">Most Active User Last Month</h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    Users with the most posts last month
-            </div>
-            <ul class="list-group list-group-flush">
+        <x-card title="Most Active User Last Month" subtitle="Users with the most posts last month">
+            @slot('items')
                 @foreach ($mostActiveLastMonth as $user)
                 <li class="list-group-item d-flex justify-content-between">
                     <span>{{ $user->name }}</span>
                     <span>{{ $user->blog_posts_count.' posts' }}</span>
                 </li>
                 @endforeach
-            </ul>
-        </div>
+            @endslot
+        </x-card>
     </div>
 </div>
 @endsection

@@ -1,33 +1,33 @@
 <li class="list-group-item d-flex justify-content-between row mb-3 {{ $post->trashed()?'border-danger':'' }}">
     <div class="col-md-8">
         <h3><a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a></h3>
-        <span class="text-muted mb-0">added {{ $post->created_at->diffForHumans() }} 
-                                      by {{ $post->user->name }}</span><br>
+        <x-updated :date="$post->created_at" :name="$post->user->name"></x-updated>
+        <br>
         @if($post->comments_count == 1)
-        <span>
-            {{ $post->comments_count }} comment
-        </span>
+            <span>
+                {{ $post->comments_count }} comment
+            </span>
         @elseif($post->comments_count > 1)
-        <span>
-            {{ $post->comments_count }} comments
-        </span>
+            <span>
+                {{ $post->comments_count }} comments
+            </span>
         @else
-        <span>No comments yet.</span>
+            <span>No comments yet.</span>
         @endif
     </div>
     
     <div>
         @can('update', $post)
-        <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Edit</a>
         @endcan
         @if(!$post->trashed())
-        @can('delete', $post)
-        <form class="d-inline" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <input type="submit" value="Delete" class="btn btn-danger">
-        </form>
-        @endcan
+            @can('delete', $post)
+                <form class="d-inline" action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                </form> 
+            @endcan
         @endif
         {{--  @if($post->trashed())
         @can('restore', $post)

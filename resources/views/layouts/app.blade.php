@@ -60,7 +60,9 @@
             <p class="text-muted mt-3">markltierney.com - Laravel CRUD</p>
         </div>
         <div class="col-md-3">
-            @yield('sidebar')
+            <div class="mr-3">
+                @yield('sidebar')
+            </div>
         </div>
         
     </div>
