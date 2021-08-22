@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
+//use Illuminate\Support\Facades\Gate;
 //use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\DB;
 
@@ -36,11 +37,26 @@ class PostsController extends Controller
 
         // dd(DB::getQueryLog());
 
+        $mostCommented = Cache::remember('blog-post-most-commented', 60, function(){
+            return BlogPost::mostCommented()->take(5)->get();
+        });
+
+        $mostActive = Cache::remember('user-most-active', 60, function(){
+            return User::withMostBlogPosts()->take(5)->get();
+        });
+
+        $mostActiveLastMonth = Cache::remember('user-most-active-last-month', 60, function(){
+            return User::withMostBlogPostsLastMonth()->take(5)->get();
+        });
+
         return view('posts.index', [
-                'posts' => BlogPost::latest()->withCount('comments')->get(),
-                'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
-                'mostActive' => User::withMostBlogPosts()->take(5)->get(),
-                'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
+                'posts' => BlogPost::latest()->withCount('comments')->with('user')->get(),
+                // 'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
+                // 'mostActive' => User::withMostBlogPosts()->take(5)->get(),
+                // 'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
+                'mostCommented' => $mostCommented,
+                'mostActive' => $mostActive,
+                'mostActiveLastMonth' => $mostActiveLastMonth,
         ]);
     }
 
@@ -89,7 +105,11 @@ class PostsController extends Controller
         //     return $query->latest();
         // }])->findOrFail($id)]);
 
-        return view('posts.show', ['post' => BlogPost::with('comments')->findOrFail($id)]);
+        $blogPost = Cache::remember("blog-post-{$id}", 60, function() use($id) {
+            return BlogPost::with('comments')->findOrFail($id);
+        });
+
+        return view('posts.show', ['post' => $blogPost]);
     }
 
     /**

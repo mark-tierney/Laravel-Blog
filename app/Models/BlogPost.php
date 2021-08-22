@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Scopes\DeletedAdminScope;
+use Illuminate\SUpport\Facades\Cache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,6 +45,10 @@ class BlogPost extends Model
         static::deleting(function (BlogPost $blogPost) {
             $blogPost->comments()->delete();
         }); 
+
+        static::updating(function (BlogPost $blogPost) {
+            Cache::forget("blog-post-{$blogPost->id}");
+        });
 
         static::restoring(function (BlogPost $blogPost) {
             $blogPost->comments()->restore();
