@@ -17,14 +17,15 @@
         <p class="mb-0">{{ $post->content }}</p>
     </div>
     <div class="card-footer">
+        <p class="text-muted">Currently being read by {{ $counter }} user(s).</p>
         <h5>Comments</h5>
         @forelse ($post->comments as $comment)
-        <p class="list-group mt-2">
-            {{ $comment->content }}
-        </p>
-        <x-updated :date="$post->created_at"></x-updated>
-        @empty
-        <p class="text-muted mb-0">No comments yet.</p>
+            <p class="list-group mt-2">
+                {{ $comment->content }}
+            </p>
+            <x-updated :date="$post->created_at"></x-updated>
+            @empty
+            <p class="text-muted mb-0">No comments yet.</p>
         @endforelse
     </div>
 </div>
