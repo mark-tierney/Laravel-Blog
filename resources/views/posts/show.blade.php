@@ -14,9 +14,11 @@
         {{--  <x-updated :date="$post->updated_at">updated</x-updated>  --}}
     </div>
     <div class="card-body">
+        <x-tags :tags="$post->tags"></x-tags>
         <p class="mb-0">{{ $post->content }}</p>
     </div>
     <div class="card-footer">
+        
         <h5>Comments</h5>
         @forelse ($post->comments as $comment)
         <p class="list-group mt-2">
@@ -29,4 +31,12 @@
     </div>
 </div>
 
+@endsection
+
+@section('sidebar_left')
+    @include('posts.partials.info')
+@endsection
+
+@section('sidebar_right')
+    @include('posts.partials.activity')
 @endsection

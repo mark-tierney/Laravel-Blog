@@ -1,8 +1,10 @@
 <li class="list-group-item d-flex justify-content-between row mb-3 {{ $post->trashed()?'border-danger':'' }}">
     <div class="col-md-8">
         <h3><a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a></h3>
+        <x-tags :tags="$post->tags"></x-tags>
         <x-updated :date="$post->created_at" :name="$post->user->name"></x-updated>
         <br>
+        
         @if($post->comments_count == 1)
             <span>
                 {{ $post->comments_count }} comment
