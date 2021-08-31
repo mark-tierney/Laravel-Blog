@@ -10,21 +10,23 @@
             <x-badge type="success" :show="now()->diffInMinutes($post->created_at) < 5">new</x-badge>
             {{ $post->title }}
         </h3>
-        <x-updated :date="$post->created_at" :name="$post->user->name"></x-updated>
-        {{--  <x-updated :date="$post->updated_at">updated</x-updated>  --}}
+        
     </div>
     <div class="card-body">
         <x-tags :tags="$post->tags"></x-tags>
-        <p class="mb-0">{{ $post->content }}</p>
+        <p class="mb-0">{{ $post->content }}</p><br>
+        <x-updated :date="$post->created_at" :name="$post->user->name"></x-updated><br>
+        <x-updated :date="$post->updated_at">updated</x-updated>
     </div>
     <div class="card-footer">
         
         <h5>Comments</h5>
+        @include('comments.form')
         @forelse ($post->comments as $comment)
         <p class="list-group mt-2">
             {{ $comment->content }}
         </p>
-        <x-updated :date="$post->created_at"></x-updated>
+        <x-updated :date="$post->created_at" :name="$comment->user->name"></x-updated>
         @empty
         <p class="text-muted mb-0">No comments yet.</p>
         @endforelse

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\SUpport\Facades\Cache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,8 @@ use App\Scopes\LatestScope;
 
 class Comment extends Model
 {
+    protected $fillable = ['content', 'user_id'];
+
     use SoftDeletes;
     use HasFactory;
 
@@ -18,15 +21,25 @@ class Comment extends Model
         return $this->belongsTo('App\Models\BlogPost');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function scopeLatest(Builder $query)
     {  
         return $query->orderBy(static::CREATED_AT, 'desc');
     }
 
-    // public static function boot()
-    // {
-    //     parent::boot();
+    public static function boot()
+    {
+        parent::boot();
 
-    //     //static::addGlobalScope(new LatestScope);
-    // }
+        static::creating(function (Comment $comment) {
+            Cache::tags(['blog-post'])->forget("blog-post-{$comment->blog_post_id}");
+            Cache::tags(['blog-post'])->forget("mostCommented");
+        });
+
+        //static::addGlobalScope(new LatestScope);
+    }
 }

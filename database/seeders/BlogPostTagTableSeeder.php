@@ -23,7 +23,7 @@ class BlogPostTagTableSeeder extends Seeder
         }
 
         $howManyMin = (int)$this->command->ask('Minimun tags on blog posts', 0);
-        $howManyMax = min((int)$this->command->ask('Maximum tags on blog posts', 0), $tagCount);
+        $howManyMax = min((int)$this->command->ask('Maximum tags on blog posts', 5), $tagCount);
 
         BlogPost::all()->each(function (BlogPost $post) use($howManyMin, $howManyMax){
             $take = random_int($howManyMin, $howManyMax);
