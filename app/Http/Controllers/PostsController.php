@@ -38,7 +38,7 @@ class PostsController extends Controller
         // dd(DB::getQueryLog());
 
         return view('posts.index', [
-                'posts' => BlogPost::latest()->withCount('comments')->with('user')->with('tags')->get(),
+                'posts' => BlogPost::latestWithRelations()->get(),
                 // 'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
                 // 'mostActive' => User::withMostBlogPosts()->take(5)->get(),
                 // 'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
@@ -90,8 +90,8 @@ class PostsController extends Controller
         //     return $query->latest();
         // }])->findOrFail($id)]);
 
-        $blogPost = Cache::remember("blog-post-{$id}", 60, function() use($id) {
-            return BlogPost::with('comments')->with('tags')->with('user')->findOrFail($id);
+        $blogPost = Cache::tags(['blog-post'])->remember("blog-post-{$id}", 60, function() use($id) {
+            return BlogPost::with('comments', 'tags', 'user', 'comments.user')->findOrFail($id);
         });
 
         return view('posts.show', ['post' => $blogPost]);

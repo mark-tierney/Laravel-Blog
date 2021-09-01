@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\SUpport\Facades\Cache;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use App\Scopes\LatestScope;
 
 class Comment extends Model
@@ -37,7 +38,7 @@ class Comment extends Model
 
         static::creating(function (Comment $comment) {
             Cache::tags(['blog-post'])->forget("blog-post-{$comment->blog_post_id}");
-            Cache::tags(['blog-post'])->forget("mostCommented");
+            Cache::tags(['blog-post'])->forget('mostCommented');
         });
 
         //static::addGlobalScope(new LatestScope);

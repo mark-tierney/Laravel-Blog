@@ -41,6 +41,11 @@ class BlogPost extends Model
         return $query->withCount('comments')->orderBy('comments_count', 'desc');
     }
 
+    public function scopeLatestWithRelations(Builder $query)
+    {
+        return $query->latest()->withCount('comments')->with('tags', 'user');
+    }
+
     public static function boot()
     {
         static::addGlobalScope(new DeletedAdminScope);

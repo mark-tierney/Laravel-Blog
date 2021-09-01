@@ -12,6 +12,7 @@ class PostCommentController extends Controller
     {
         $this->middleware('auth')->only(['store']);
     }
+    
     public function store(BlogPost $post, StoreComment $request)
     {
         $post->comments()->create([
