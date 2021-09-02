@@ -5,7 +5,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                     Built with Laravel 8.
                 </h6>
-                <p>This is a simple app implementing a CRUD in Laravel PHP for managing content on a MySQL database, developed by Mark L Tierney for demonstration purposed.</p>
+                <p>This is a blog app implementing a CRUD with many useful features in Laravel PHP for managing content on a MySQL database, developed by Mark L Tierney for demonstration purposed.</p>
                 <a href="https://github.com/mark-tierney/Laravel-Blog" target="_blank" class="btn btn-success"><i class="bi bi-github" ></i> Github</a>
             </div>  
         </div>
@@ -25,10 +25,16 @@
                     Conditional rendering in blades
                 </li>
                 <li class="list-group-item">
-                    Blade components
+                    Admin user priveledges
                 </li>
                 <li class="list-group-item">
-                    Admin user priveledges
+                    Tags and tag filtering
+                </li>
+                <li class="list-group-item">
+                    Comments form for users
+                </li>
+                <li class="list-group-item">
+                    Post ranking queries
                 </li>
             </x-slot>
         </x-card>

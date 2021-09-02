@@ -17,8 +17,8 @@ class HomeTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertSeeText('Laravel CRUD');
-        $response->assertSeeText('This is a simple app implementing a CRUD in Laravel PHP for managing content on a MySQL database, developed by Mark L Tierney for demonstration purposed.');
+        $response->assertSeeText('Laravel Blog');
+        $response->assertSeeText('This is a blog app implementing a CRUD with many useful features in Laravel PHP for managing content on a MySQL database, developed by Mark L Tierney for demonstration purposed.');
     }
 
     // public function testContactPage()

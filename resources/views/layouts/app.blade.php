@@ -30,7 +30,7 @@
     <div class="flex-column flex-md-row align-items-center p-3 px-md-4 border-bottom shadow-sm mb-3 text-white gradient-full">
         <div class="row justify-content-center">
             <div class="col d-flex">
-                <h5 class="my-0 mr-md-auto font-weight-normal">Laravel CRUD</h5>
+                <h5 class="my-0 mr-md-auto font-weight-normal">Laravel Blog</h5>
                 <nav class="my-2 my-md-0">
                     <a href="{{ route('home.index') }}" class="p-2 text-white">Home</a>
                     <a href="{{ route('home.contact') }}" class="p-2 text-white">Contact</a>
@@ -58,7 +58,7 @@
                 </div>
             @endif
             @yield('content') 
-            <p class="text-muted mt-3">markltierney.com - Laravel CRUD</p>
+            <p class="text-muted mt-3">markltierney.com - Laravel Blog</p>
         </div>
         <div class="col-lg-3">
             @yield('sidebar_right')
